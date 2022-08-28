@@ -1,7 +1,6 @@
 package com.example.fragmentpager
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,10 +26,10 @@ class ScrollerActitivy : AppCompatActivity() {
         recyclerView.setOnScrollChangeListener { view, scrollX, scrollY, oldScrollX, oldScrollY ->
 
             PureValueCalculator.calculate(
-                startValue = -200.0.dp2px(this@ScrollerActitivy).toDouble(),
-                endValue = 0.0,
+                start = -200.0.dp2px(this@ScrollerActitivy).toDouble(),
+                end = 0.0,
                 velocity = -oldScrollY.toDouble(),
-                currentValue = {
+                current = {
                     val params = footer.layoutParams as? ViewGroup.MarginLayoutParams
                     return@calculate (params?.topMargin ?: 0.0).toDouble()
                 }

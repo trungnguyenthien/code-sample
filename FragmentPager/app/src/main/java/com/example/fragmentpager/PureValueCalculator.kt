@@ -1,41 +1,22 @@
 package com.example.fragmentpager
 
 import android.content.Context
-import android.util.Log
-import kotlin.math.abs
 
 object PureValueCalculator {
-    fun calculate(
-        startValue: Double,
-        endValue: Double,
-        velocity: Double,
-        currentValue: () -> Double,
-    ): Double {
-        val current = currentValue.invoke()
-        val distance = abs(endValue - startValue)
-        var newValue = current
-        if (startValue < endValue) {
-            newValue += velocity
-            if (endValue <= newValue) {
-                newValue = endValue
-            } else if (startValue >= newValue) {
-                newValue = startValue
-            }
-        } else {
-            newValue += velocity
-            if (endValue >= newValue) {
-                newValue = endValue
-            } else if (startValue <= newValue) {
-                newValue = startValue
-            }
-        }
-        Log.w("MY", "PureValueCalculator = " + newValue)
-        return newValue
+    fun calculate(start: Double,  end: Double, velocity: Double, current: () -> Double, ) = when (start < end) {
+        true -> (current.invoke() + velocity).inRange(start, end).toDouble()
+        false -> (current.invoke() + velocity).inRange(end, start).toDouble()
     }
 }
 
 fun Context.dp2px(dp: Float): Float {
     return dp * resources.displayMetrics.density
+}
+
+fun Number.inRange(min: Number, max: Number) = when {
+    (this.toDouble() <= min.toDouble()) -> min
+    (this.toDouble() >= max.toDouble()) -> max
+    else -> this
 }
 
 fun Number.dp2px(context: Context): Number {
