@@ -14,7 +14,7 @@
         android:theme="@style/Theme.FragmentPager"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ScrollerActitivy"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.FragmentPager.NoActionBar">
